@@ -1,16 +1,17 @@
 # coding=utf-8
 import logging
 
-import flask_bcrypt as _fb
-import flask_migrate as _fm
-import flask_sqlalchemy as _fs
-
 __author__ = 'Kien'
+
+from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
+
 _logger = logging.getLogger(__name__)
 
-db = _fs.SQLAlchemy()
-migrate = _fm.Migrate(db=db)
-bcrypt = _fb.Bcrypt()
+db = SQLAlchemy()
+migrate = Migrate(db=db)
+bcrypt = Bcrypt()
 
 
 def init_app(app, **kwargs):
@@ -30,4 +31,9 @@ def init_app(app, **kwargs):
 
 
 from .base import TimestampMixin
+from .room import Room, RoomSchema
 from .user import User, UserSchema
+from .song import Song, SongSchema
+from .vote import Vote, VoteSchema
+from .message import Message, MessageSchema
+from .reaction import Reaction, ReactionSchema

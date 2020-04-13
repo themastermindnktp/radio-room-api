@@ -5,7 +5,7 @@ from flask import Blueprint
 from flask_restplus import Api
 
 from boilerplate.extensions.exceptions import global_error_handler
-from .user import ns as user_ns
+from .user import user_namespace as user_ns
 
 __author__ = 'ThucNC'
 _logger = logging.getLogger(__name__)
