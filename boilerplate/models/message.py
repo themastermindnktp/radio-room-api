@@ -19,13 +19,13 @@ class Message(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     content = db.Column(db.Text, nullable=False)
 
-    room_id = db.Column(db.Integer, ForeignKey('rooms.id'))
+    room_id = db.Column(db.Integer, ForeignKey('rooms.id'), nullable=False)
     room = relationship('Room', back_populates='messages')
 
-    user_id = db.Column(db.Integer, ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
     user = relationship('User', back_populates='messages')
 
-    reactions = relationship('Reaction', back_populates='message')
+    reactions = relationship('Reaction', backref='message')
 
     def to_dict(self):
         pass

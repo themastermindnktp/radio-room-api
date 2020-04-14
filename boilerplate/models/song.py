@@ -21,13 +21,13 @@ class Song(db.Model, TimestampMixin):
     number_of_upvotes = db.Column(db.Integer)
     number_of_downvotes = db.Column(db.Integer)
 
-    room_id = db.Column(db.Integer, ForeignKey('rooms.id'))
+    room_id = db.Column(db.Integer, ForeignKey('rooms.id'), nullable=False)
     room = relationship('Room', back_populates='songs')
 
-    user_id = db.Column(db.Integer, ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
     user = relationship('User', back_populates='songs')
 
-    votes = relationship('Vote', back_populates='song')
+    votes = relationship('Vote', backref='song')
 
     def to_dict(self):
         pass

@@ -24,10 +24,10 @@ class User(db.Model, TimestampMixin):
     room_id = db.Column(db.Integer, ForeignKey('rooms.id'))
     room = relationship('Room', back_populates='users')
 
-    songs = relationship('Song', back_populates='user')
-    votes = relationship('Vote', back_populates='user')
-    messages = relationship('Message', back_populates='user')
-    reactions = relationship('Reaction', back_populates='user')
+    songs = relationship('Song', backref='user')
+    votes = relationship('Vote', backref='user')
+    messages = relationship('Message', backref='user')
+    reactions = relationship('Reaction', backref='user')
 
     def to_dict(self):
         return {

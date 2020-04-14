@@ -24,10 +24,10 @@ class Vote(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     type = db.Column(db.Enum(Type), nullable=False)
 
-    song_id = db.Column(db.Integer, ForeignKey('songs.id'))
+    song_id = db.Column(db.Integer, ForeignKey('songs.id'), nullable=False)
     song = relationship('Song', back_populates='votes')
 
-    user_id = db.Column(db.Integer, ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
     user = relationship('User', back_populates='songs')
 
     def to_dict(self):

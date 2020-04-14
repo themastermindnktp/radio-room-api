@@ -2,6 +2,7 @@
 import logging
 
 from flask_restplus import fields
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 
 from boilerplate.models import db, bcrypt
@@ -27,9 +28,12 @@ class Room(db.Model, TimestampMixin):
     current_song = db.Column(db.String(512))
     current_song_start_time = db.Column(db.TIMESTAMP)
 
-    users = relationship('User', back_populates='room')
-    songs = relationship('Song', back_populates='room')
-    messages = relationship('Message', back_populates='room')
+    creator_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
+    creator = relationship('User')
+
+    users = relationship('User', backref='room')
+    songs = relationship('Song', backref='room')
+    messages = relationship('Message', backref='room')
 
     @property
     def password(self):

@@ -29,10 +29,10 @@ class Reaction(db.Model, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     type = db.Column(db.Enum(Type), nullable=False)
 
-    user_id = db.Column(db.Integer, ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, ForeignKey('users.id'), nullable=False)
     user = relationship('User', back_populates='reactions')
 
-    message_id = db.Column(db.Integer, ForeignKey('messages.id'))
+    message_id = db.Column(db.Integer, ForeignKey('messages.id'), nullable=False)
     message = relationship('Message', back_populates='reactions')
 
     def to_dict(self):
